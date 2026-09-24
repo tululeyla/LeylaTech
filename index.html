@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LeylaTech — Modern Dev Team Platform</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 1. HEADER SECTION -->
+  <header class="main-header">
+
+    <nav class="navbar">
+      <a href="#" class="nav-logo">LeylaTech</a>
+
+ <button type="button" class="nav-toggle" aria-label="Toggle menu" aria-controls="navbar"  aria-expanded="false">
+        <span class="hamburger"></span>
+      </button>
+
+      <ul class="nav-menu"  id="navbar" >
+        <li><a href="#hero" class="nav-link">Home</a></li>
+        <li><a href="#features" class="nav-link">Team</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="#login" class="btn-secondary">Sign In</a>
+        <a href="#register" class="btn-primary">Get Started</a>
+      </div>
+
+     
+    </nav>
+  </header>
+
+  <main>
+    <!-- 2. HERO SECTION -->
+    <section id="hero" class="hero-section">
+      <div class="hero-content">
+        <h1>Empower Your Development Team</h1>
+        <p>Leyla hired top-tier engineers to supercharge productivity and build scalable web applications faster than ever.</p>
+        <div class="hero-cta">
+          <a href="#features" class="btn-primary">Explore Team</a>
+          <a href="#about" class="btn-secondary">Learn More</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. FEATURES / TEAM SECTION -->
+    <section id="features" class="features-section">
+      <header class="features-header">
+        <h2>Meet the Engineers</h2>
+        <p>The dedicated developers driving LeylaTech forward.</p>
+        <div class="search-container">
+          
+  <input 
+    type="text" 
+    id="searchInput" 
+    placeholder="Search engineers by name or role..." 
+    aria-label="Search team members"
+  />
+</div>
+
+<!-- Button placed inside <section id="features"> next to search -->
+<div class="actions-container">
+  <button type="button" class="btn-primary" id="openFormBtn">+ Add Engineer</button>
+</div>
+
+<!-- Add Member Modal Overlay -->
+<div class="modal-overlay form" id="formModalOverlay" aria-hidden="true">
+  <div class="modal-content">
+    <button type="button" class="modal-close" id="formModalClose" aria-label="Close modal">&times;</button>
+    <h2>Add New Engineer</h2>
+    
+    <form id="addMemberForm">
+      <div class="form-group">
+        <label for="memberName">Full Name</label>
+        <input type="text" id="memberName" required placeholder="e.g., Sarah Connor">
+      </div>
+
+      <div class="form-group">
+        <label for="memberRole">Role</label>
+        <input type="text" id="memberRole" required placeholder="e.g., DevOps Engineer">
+      </div>
+
+      <div class="form-group">
+        <label for="memberImage">Image Path / URL</label>
+        <input type="text" id="memberImage" required placeholder="images/fourth man.jpg">
+      </div>
+
+      <button type="submit" class="btn-primary form-submit-btn">Save Member</button>
+    </form>
+  </div>
+</div>
+      </header>
+
+      <div class="feature-grid"></div>
+    </section>
+  </main>
+
+  <!-- 4. FOOTER SECTION -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <p>&copy; 2026 LeylaTech. All rights reserved.</p>
+    </div>
+  </footer>
+  <!-- Modal Popup Container -->
+<div class="modal-overlay" id="modalOverlay" aria-hidden="true">
+  <div class="modal-content">
+    <button type="button" class="modal-close" id="modalClose" aria-label="Close modal">&times;</button>
+    <div class="modal-body" id="modalBody">
+      <!-- Dynamic details injected by JS -->
+    </div>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

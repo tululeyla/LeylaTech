@@ -1,0 +1,269 @@
+*,*::before,*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+}
+.main-header {
+  position: sticky;
+  top: 0; 
+  padding: 20px;
+  border-bottom: 1px solid rgb(224, 222, 222);
+  z-index: 1000; 
+  background-color: white;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+.nav-menu {
+  display: flex;
+  gap: 50px;
+}
+.nav-menu li{
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: rgb(11, 2, 24);
+  cursor: pointer;
+}
+.nav-actions {
+  display: flex;
+  gap: 20px;
+}
+.btn-secondary,
+.btn-primary{
+  text-align: center;
+  padding: 12px;
+  border-radius: 12px;
+}
+.btn-secondary{
+  background-color: rgb(197, 185, 185);
+}
+.btn-primary{
+  background-color: rgb(74, 74, 223);
+}
+.nav-toggle {
+  background-color: white;
+  display: none;
+  border: none;
+  outline: none;
+}
+main{
+  padding: 20px;
+  text-align: center;
+}
+.hero-section{
+  padding: 4rem 1rem;
+  margin: 20px auto;
+  border-radius: 20px;
+  max-width: 900px;
+  background-color: rgb(252, 250, 248);
+}
+.hero-content{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.hero-content h1 {
+  color: rgb(2, 2, 58);
+ 
+}
+.hero-content p {
+  color: rgb(79, 79, 97);
+  margin-bottom: 10px;
+}
+.features-section{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.features-header {
+ display: flex;
+ flex-direction: column;
+ gap: 10px;
+}
+.search-container {
+  max-width: 400px;
+  margin: 0 auto 20px auto;
+}
+
+#searchInput {
+  width: 100%;
+  padding: 10px 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+}
+
+#searchInput:focus {
+  border-color: #2563eb;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 20px;
+}
+img{
+  border-radius: 50%;
+  height: 98px;
+  width: 98px;
+  object-fit: cover;
+}
+.feature-card {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 10px;
+padding: 10px;
+background-color: rgb(243, 240, 240);
+border-radius: 20px;
+}
+.main-footer {
+  background-color: #0f172a;
+  border-top:1px solid #8d97bd;
+  color: white;
+  margin-top: 20px;
+  padding: 50px;
+}
+.footer-container {
+  text-align: center;
+}
+.nav-menu.active{
+  display: block;
+}
+.hamburger {
+  cursor: pointer;
+}
+.actions-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+#addMemberForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 15px;
+  text-align: left;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.form-group input {
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.form-submit-btn {
+  margin-top: 10px;
+  cursor: pointer;
+  border: none;
+}
+/* Modal Backdrop Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(15, 23, 42, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 2000;
+}
+
+/* Modal Open State */
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Modal Content Box */
+.modal-content {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 16px;
+  max-width: 450px;
+  width: 90%;
+  position: relative;
+  text-align: center;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #64748b;
+}
+.feature-card {
+  position: relative; /* For absolute positioning of close button */
+}
+
+.btn-delete {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.btn-delete:hover {
+  color: #ef4444; /* Highlight red on hover */
+}
+
+@media(max-width: 1020px){
+  .feature-grid{
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+@media(max-width: 768px){
+  .feature-grid{
+    grid-template-columns: 1fr;
+  }
+  .nav-menu{
+    display: none;
+  }
+  .nav-toggle{
+    display: block;
+  }
+.hamburger::before {
+   content: "☰";
+}
+
+}
