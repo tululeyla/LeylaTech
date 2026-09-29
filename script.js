@@ -189,5 +189,54 @@ saveTeamMembers();
   formModal.classList.remove("active");
 })
 
+// Make sure this ID matches your container div in index.html
+const teamContainer = document.getElementById("team-container");
+
+async function fetchAndRenderTeam() {
+  // Show a quick loading message while waiting for the network
+  teamContainer.innerHTML = "<p>Loading team members...</p>";
+
+  try {
+    // Await the API response
+    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    
+    // Check if response is successful (status code 200)
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    // Convert response stream to usable JSON
+    const users = await response.json();
+
+    // Map through users array to create card HTML string
+    const cardsHTML = users.map(user => `
+      <div class="team-card" data-id="${user.id}">
+        <h3>${user.name}</h3>
+        <p class="role">${user.company.catchPhrase}</p>
+        <p class="email">📧 ${user.email}</p>
+        <button class="delete-btn" onclick="removeCard(${user.id})">Delete</button>
+      </div>
+    `).join("");
+
+    // Inject generated HTML straight into your DOM
+    teamContainer.innerHTML = cardsHTML;
+
+  } catch (error) {
+    // Show error UI if fetch fails or network breaks
+    teamContainer.innerHTML = `<p class="error">Failed to load team data: ${error.message}</p>`;
+  }
+}
+
+// Simple delete helper function
+function removeCard(id) {
+  const card = document.querySelector(`.team-card[data-id="${id}"]`);
+  if (card) {
+    card.remove();
+  }
+}
+
+// Call function on page load
+fetchAndRenderTeam();
+
 
 
