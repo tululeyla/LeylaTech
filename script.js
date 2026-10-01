@@ -55,7 +55,6 @@ grid.innerHTML = team();
 const searchInput =document.getElementById("searchInput");
 searchInput.addEventListener("input",(e)=>{
 const searchTerm = e.target.value.toLowerCase();
-
 const filteredMembers = teamMembers.filter(({name,role}) => 
   name.toLowerCase().includes(searchTerm) ||
   role.toLowerCase().includes(searchTerm)
@@ -192,21 +191,38 @@ saveTeamMembers();
 // Make sure this ID matches your container div in index.html
 const teamContainer = document.getElementById("team-container");
 
-async function fetchAndRenderTeam() {
+async function fetchAndRenderTeam(searchTerm = "") {
   // Show a quick loading message while waiting for the network
   teamContainer.innerHTML = "<p>Loading team members...</p>";
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(),3000);
+
+let url = "https://jsonplaceholder.typicode.com/users";
+  if (searchTerm) {
+    url += `?name=${encodeURIComponent(searchTerm)}`;
+  }
 
   try {
     // Await the API response
-    const response = await fetch("https://jsonplaceholder.typicode.com/users");
-    
-    // Check if response is successful (status code 200)
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
+    const response = await fetch(url, {
+       headers : {
+        "Content-Type": "application/json"
+      },
+      signal: controller.signal 
     }
+  );
 
-    // Convert response stream to usable JSON
-    const users = await response.json();
+  clearTimeout(timer);
+
+  if(!response.ok){
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  const users = await response.json();
+if(users.length === 0){
+  teamContainer.innerHTML = `<p class="loading-state">No team members found matching "${searchTerm}".</p>`;
+      return;
+}
+
 
     // Map through users array to create card HTML string
     const cardsHTML = users.map(user => `
@@ -222,9 +238,12 @@ async function fetchAndRenderTeam() {
     teamContainer.innerHTML = cardsHTML;
 
   } catch (error) {
-    // Show error UI if fetch fails or network breaks
+  if (error.name === "AbortError") {
+    teamContainer.innerHTML = `<p class="error">Request timed out. Please check your network connection.</p>`;
+  } else {
     teamContainer.innerHTML = `<p class="error">Failed to load team data: ${error.message}</p>`;
   }
+}
 }
 
 // Simple delete helper function
@@ -236,7 +255,15 @@ function removeCard(id) {
 }
 
 // Call function on page load
+
+
+let deboucerTime;
+const searchName = document.querySelector(".search-by-name");
+searchName.addEventListener("input",(e)=>{
+const searchTerm = e.target.value.trim();
+clearTimeout(deboucerTime);
+deboucerTime = setTimeout(() => {
+  fetchAndRenderTeam(searchTerm);
+}, 500);
+});
 fetchAndRenderTeam();
-
-
-

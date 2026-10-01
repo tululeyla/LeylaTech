@@ -95,13 +95,15 @@ main{
   margin: 0 auto 20px auto;
 }
 
-#searchInput {
-  width: 100%;
+#searchInput, .search-by-name{
   padding: 10px 16px;
   border: 1px solid #cbd5e1;
   border-radius: 8px;
   font-size: 1rem;
   outline: none;
+}
+#searchInput {
+width: 100%;
 }
 
 #searchInput:focus {
